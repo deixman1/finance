@@ -16,9 +16,11 @@ class EventController extends Controller
         foreach ($events as $event) {
             $event = $event->outcome_income;
             if($event instanceof Outcome) {
-                //(empty($events['sum']) ? $events['sum'] = $event->items->sum('sum') : $events['sum'] += $event->items->sum('sum'));
-                $event['sum'] = $event->items->sum('sum');
+                $event['sum'] = round($event->items->sum(function ($item){
+                    return $item->sum * $item->count;
+                }),2);
                 $event['items'] = $event->items;
+                //(empty($events['sum']) ? $events['sum'] = $event->items->sum('sum') : $events['sum'] += $event->items->sum('sum'));
             }
         }
         return $events;
@@ -30,17 +32,6 @@ class EventController extends Controller
         return Event::create([
             'user_id' => Auth::user()->id
         ])->id;
-        /*$event = new Event;
-        $event->outcome_income()->associate()->save();*/
-        /*return Event::create([
-            'name' => $request->input('name'),
-            'type' => $request->input('type'),
-            'user_id' => Auth::user()->id
-        ])->id;*/
-        /*$event = Event::find(1);
-        $income = Income::find(1);
-        $event->outcome_income()->associate($income)->save();*/
-
     }
     public function edit() {
 

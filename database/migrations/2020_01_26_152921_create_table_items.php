@@ -17,6 +17,7 @@ class CreateTableItems extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->double('sum',12,2)->unsigned()->default(0)->nullable();
+            $table->double('count',12,3)->unsigned()->default(0)->nullable();
             $table->bigInteger('outcome_id')->unsigned()->index()->nullable();
             $table->timestamps();
         });

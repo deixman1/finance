@@ -23,6 +23,7 @@ class IncomeController extends Controller
     }
     public function store(Request $request) {
         $request = $request->all();
+        $request[0]["name"] = (empty($request[0]["name"]) ? "Приход" : $request[0]["name"]);
         $income = Income::create($request[0]);
         $income->event()->save(Event::find($request[1]));
         /*$income = Income::create([

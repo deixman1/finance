@@ -83,9 +83,6 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Выход') }}
                                     </a>
-                                    <a class="dropdown-item">
-                                        Баланс: {{ Auth::user()->balance }} руб.
-                                    </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
