@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use App\Models\Income;
 use App\Models\Outcome;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

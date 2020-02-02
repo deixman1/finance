@@ -6,7 +6,6 @@ use App\Models\Event;
 use App\Models\Income;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules\In;
 
 class IncomeController extends Controller
 {
