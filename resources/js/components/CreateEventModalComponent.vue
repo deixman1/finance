@@ -35,7 +35,7 @@
                                     <div class="form-group row">
                                         <label for="sum-income" class="col-md-4 col-form-label text-md-right">Сумма дохода:</label>
                                         <div class="col-md-8">
-                                            <input v-model="income.sum" type="text" class="form-control" id="sum-income">
+                                            <input v-model="income.sum" @keypress="onlyForCurrency(income.sum, $event)" type="text" class="form-control" id="sum-income">
                                         </div>
                                     </div>
                                 </div>
@@ -57,15 +57,21 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="form-group row">
-                                            <label for="name-item" class="col-md-5 col-form-label text-right">Название:</label>
-                                            <div class="col-md-7">
+                                            <label for="name-item" class="col-md-6 col-form-label text-right">Название:</label>
+                                            <div class="col-md-6">
                                                 <input v-model="item.name" type="text" class="form-control" id="name-item">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="sum-item" class="col-md-5 col-form-label text-right">Сумма:</label>
-                                            <div class="col-md-7">
-                                                <input v-model="item.sum" type="text" class="form-control" id="sum-item">
+                                            <label for="sum-item" class="col-md-6 col-form-label text-right">Сумма:</label>
+                                            <div class="col-md-6">
+                                                <input v-model="item.sum" type="text" @keypress="onlyForCurrency(item.sum, $event)" class="form-control" id="sum-item">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="count-item" class="col-md-6 col-form-label text-right">Штук/Грамм:</label>
+                                            <div class="col-md-6">
+                                                <input v-model="item.count" type="text" @keypress="onlyForCurrency(item.count, $event)" class="form-control" id="count-item">
                                             </div>
                                         </div>
                                     </div>
@@ -98,7 +104,7 @@
                 },
                 outcome: {
                     name: "",
-                    items: [{name: "", sum: 0}]
+                    items: [{name: "", sum: 0.00, count: 0.00}]
                 }
             }
         },
@@ -107,12 +113,29 @@
         },
         methods: {
             addOutcomeCard: function() {
-                this.outcome.items.push({name: "", sum: 0});
+                this.outcome.items.push({name: "", sum: 0.00, count: 0.00});
             },
             removeOutcomeCard: function(e) {
                 if (this.outcome.items.length == 1)
                     return;
                 this.outcome.items.splice(e,1);
+            },
+            onlyForCurrency: function (value, event) {
+                if (isNaN(value) || value === 0) {
+                    event.preventDefault();
+                    return;
+                }
+                let keyCode = (event.keyCode ? event.keyCode : event.which);
+                // only allow number and one dot
+                if ((keyCode < 48 || keyCode > 57) && (keyCode !== 46 || value.indexOf('.') != -1)) { // 46 is dot
+                    event.preventDefault();
+                }
+
+                // restrict to 2 decimal places
+                if(value!=null && value.indexOf(".")>-1 && (value.split('.')[1].length > 2)){
+                    event.preventDefault();
+                }
+                //console.log(this.outcome);
             },
             storeEvent: function () {
                 axios.post('/event/store', this.$data).then((e) => {
@@ -139,6 +162,7 @@
                 axios.post('/item/store', [this.outcome.items, e]).then((e) => {
                     //console.log(e.data);
                     this.$root.$emit('history-view');
+                    this.$root.$emit('user-view');
                 }).catch((error) => {
                     console.log(error);
                 });
@@ -146,6 +170,8 @@
             storeIncome: function (e) {
                 axios.post('/income/store', [this.income, e]).then((e) => {
                     //console.log(e.data);
+                    this.$root.$emit('history-view');
+                    this.$root.$emit('user-view');
                 }).catch((error) => {
                     console.log(error);
                 });

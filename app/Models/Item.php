@@ -9,7 +9,7 @@ class Item extends Model
     protected $table = 'item';
     protected $guarded = [];
     protected $fillable = [
-        'name', 'sum'
+        'name', 'sum', 'count'
     ];
     public $timestamps = true;
 

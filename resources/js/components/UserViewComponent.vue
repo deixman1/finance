@@ -2,12 +2,12 @@
     <div>
         <span v-if="loading">Загрузка...</span>
         <div class="card" v-if="!loading">
-            <div class="card-header bg-dark text-light">Имя: {{ profile.name }}</div>
+            <div class="card-header bg-dark text-light">Имя: {{ profile.user.name }}</div>
             <div class="card-body">
-                Баланс: {{ profile.user.balance }} рублей<br>
+                Баланс на момент регистрации: {{ profile.user.balance }} рублей<br>
                 Общий доход: {{ profile.income.sum }} рублей<br>
                 Общий расход: {{ profile.outcome.sum }} рублей<br>
-                Баланск итого: {{ calcBalance() }} рублей
+                Баланс итого: {{ calcBalance() }} рублей
             </div>
         </div>
     </div>
@@ -28,32 +28,52 @@
         mounted() {
             console.log('Component user profile mounted.');
             this.update();
+            this.loading = false;
+            this.$root.$on('user-view', () => {
+                this.loading = true;
+                this.update();
+                this.loading = false;
+            });
         },
         methods: {
-            update: async function() {
-                await axios.get('/user/get').then((e) => {
+            update: function() {
+                axios.get('/user/get').then((e) => {
                     this.profile.user = e.data;
                     this.getOutcome();
                     this.getIncome();
                     //console.log(e.data);
                     //this.calcBalance();
-                    this.loading = false;
                 });
             },
-            getOutcome: async function () {
-                await axios.get('/outcome/get').then((e) => {
+            getOutcome: function () {
+                axios.get('/outcome/get').then((e) => {
                     this.profile.outcome = e.data;
+                    if (isNaN(this.profile.outcome.sum))
+                        this.profile.outcome.sum = 0.00;
                     //console.log(e.data);
                 });
             },
-            getIncome: async function () {
-                await axios.get('/income/get').then((e) => {
+            getIncome: function () {
+                axios.get('/income/get').then((e) => {
                     this.profile.income = e.data;
+                    if (isNaN(this.profile.income.sum))
+                        this.profile.income.sum = 0.00;
                     //console.log(e.data);
                 });
             },
             calcBalance: function () {
-                return parseFloat(this.profile.user.balance) + parseFloat(this.profile.income.sum) - parseFloat(this.profile.outcome.sum);
+                //console.log(parseFloat(this.profile.user.balance));
+                //console.log(this.profile.income.sum);
+                //console.log(parseFloat(this.profile.outcome.sum));
+                let balance = parseFloat(this.profile.user.balance);
+                let income = parseFloat(this.profile.income.sum);
+                let outcome = parseFloat(this.profile.outcome.sum);
+                if (isNaN(income))
+                    income = 0.00;
+                if (isNaN(outcome))
+                    outcome = 0.00;
+                let result = ((balance + income) - outcome);
+                return result.toFixed(2);
             }
         }
     }

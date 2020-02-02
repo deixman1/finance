@@ -9,9 +9,9 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Название</th>
-                                <th scope="col">Сумма</th>
-                                <th scope="col">Дата</th>
+                                <th scope="col">Название события</th>
+                                <th scope="col">Итоговая сумма события</th>
+                                <th scope="col">Дата добовления</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -19,7 +19,7 @@
                             <th scope="row">{{ index+1 }}</th>
                             <td>{{ event.outcome_income.name }}</td>
                             <td>{{ event.outcome_income.sum }}</td>
-                            <td>{{ event.outcome_income.created_at }}</td>
+                            <td>{{ convertUTCDateToLocalDate(event.outcome_income.created_at) }}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -40,23 +40,33 @@
         mounted() {
             console.log('Component history mounted.');
             this.update();
+            this.loading = false;
             this.$root.$on('history-view', () => {
-                // your code goes here
-                this.update()
+                this.loading = true;
+                this.update();
+                this.loading = false;
             });
         },
         methods: {
             update: function() {
                 axios.get('/event/get').then((e) => {
                     this.events = e.data;
-                    this.loading = false;
                     //console.log('update history');
                     //console.log(e.data);
                 });
-                /*axios.get('/user/get').then((e) => {
-                    this.profile = e.data;
-                    this.loading = false;
-                });*/
+            },
+            convertUTCDateToLocalDate: function(date) {
+                date = new Date(date);
+                let newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
+                let offset = date.getTimezoneOffset() / 60;
+                let hours = date.getHours();
+                newDate.setHours(hours - offset);
+                let currDate = ("0" + newDate.getDate()).slice(-2);
+                let currMunth = ("0" + (newDate.getMonth()+1)).slice(-2);
+                let currYear = newDate.getFullYear();
+                let currHours = ("0" + newDate.getHours()).slice(-2);
+                let currMinutes = ("0" + newDate.getMinutes()).slice(-2);
+                return currDate + "." + currMunth + "." + currYear + " " + currHours + ":" + currMinutes;
             }
         }
     }
