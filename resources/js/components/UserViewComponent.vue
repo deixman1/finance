@@ -5,8 +5,8 @@
             <div class="card-header bg-dark text-light">Имя: {{ profile.user.name }}</div>
             <div class="card-body">
                 Баланс на момент регистрации: {{ profile.user.balance }} рублей<br>
-                Общий доход: {{ profile.income.sum }} рублей<br>
-                Общий расход: {{ profile.outcome.sum }} рублей<br>
+                Общий доход: {{ profile.income.sum.toFixed(2) }} рублей<br>
+                Общий расход: {{ profile.outcome.sum.toFixed(2) }} рублей<br>
                 Баланс итого: {{ calcBalance() }} рублей
             </div>
         </div>

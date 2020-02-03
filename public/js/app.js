@@ -38317,13 +38317,13 @@ var render = function() {
             _c("br"),
             _vm._v(
               "\n            Общий доход: " +
-                _vm._s(_vm.profile.income.sum) +
+                _vm._s(_vm.profile.income.sum.toFixed(2)) +
                 " рублей"
             ),
             _c("br"),
             _vm._v(
               "\n            Общий расход: " +
-                _vm._s(_vm.profile.outcome.sum) +
+                _vm._s(_vm.profile.outcome.sum.toFixed(2)) +
                 " рублей"
             ),
             _c("br"),
