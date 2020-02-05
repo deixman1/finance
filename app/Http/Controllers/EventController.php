@@ -42,4 +42,13 @@ class EventController extends Controller
     public function destroy() {
 
     }
+    public function test() {
+        return [
+            'labels' => ['1', '2', '3'],
+            'datasets' => [
+                'label' => 'test',
+                'data' => [10, 20, 30],
+            ]
+        ];
+    }
 }

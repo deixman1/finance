@@ -1,11 +1,10 @@
 <template>
-    <div class="row" style="margin-top: 1rem">
-        <div class="col-12">
+        <div>
             <span v-if="loading">Загрузка...</span>
             <div class="card" v-if="!loading">
                 <div class="card-header bg-dark text-light">История</div>
                 <div class="card-body">
-                    <table class="table">
+                    <table class="table table-sm table-hover">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
@@ -26,7 +25,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </template>
 
 <script>

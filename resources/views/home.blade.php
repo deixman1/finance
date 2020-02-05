@@ -4,7 +4,7 @@
     {{--{{ dd(json_encode($balance)) }}--}}
 <div class="container">
     <div class="row justify-content-center align-items-center">
-        <div class="col d-flex justify-content-center">
+        <div class="col-md-6 d-flex justify-content-center">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewEventModal" style="font-size: 18px">+ Создать новое событие</button>
         </div>
         <div class="col-md-6">
@@ -16,7 +16,14 @@
                     @endif--}}
         </div>
     </div>
-    <history-view></history-view>
+    <div class="row mt-2 justify-content-center align-items-center">
+        <div class="col-md-6">
+            <line-chart-view></line-chart-view>
+        </div>
+        <div class="col-md-6">
+            <history-view></history-view>
+        </div>
+    </div>
     <!-- Modal -->
     <create-event-modal></create-event-modal>
 </div>

@@ -16,6 +16,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JavaScript File" />
         <option value="Vue Single File Component" />
       </list>
     </option>
@@ -183,7 +184,13 @@
       <workItem from="1580388688331" duration="26980000" />
       <workItem from="1580634990722" duration="3738000" />
       <workItem from="1580644761113" duration="816000" />
+<<<<<<< Updated upstream
       <workItem from="1580651089036" duration="11005000" />
+=======
+      <workItem from="1580651089036" duration="12955000" />
+      <workItem from="1580746445656" duration="3506000" />
+      <workItem from="1580828476264" duration="4835000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>

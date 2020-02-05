@@ -22,6 +22,7 @@ window.Vue = require('vue');
 Vue.component('user-view', require('./components/UserViewComponent.vue').default);
 Vue.component('create-event-modal', require('./components/CreateEventModalComponent.vue').default);
 Vue.component('history-view', require('./components/HistoryViewComponent.vue').default);
+Vue.component('line-chart-view', require('./components/ChartLineComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
