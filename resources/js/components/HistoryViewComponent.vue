@@ -3,22 +3,22 @@
             <span v-if="loading">Загрузка...</span>
             <div class="card" v-if="!loading">
                 <div class="card-header bg-dark text-light">История</div>
-                <div class="card-body">
+                <div class="card-body p-0">
                     <table class="table table-sm table-hover">
                         <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Название события</th>
-                                <th scope="col">Итоговая сумма события</th>
-                                <th scope="col">Дата добовления</th>
+                            <tr class="d-flex">
+                                <th scope="col" class="col-1">#</th>
+                                <th scope="col" class="text-center col-4">Название<br>события</th>
+                                <th scope="col" class="text-center col-3">Итоговая<br>сумма</th>
+                                <th scope="col" class="text-center col-4">Дата<br>добавления</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="(event, index) in events">
-                            <th scope="row">{{ index+1 }}</th>
-                            <td>{{ event.outcome_income.name }}</td>
-                            <td>{{ event.outcome_income.sum }}</td>
-                            <td>{{ convertUTCDateToLocalDate(event.outcome_income.created_at) }}</td>
+                        <tr v-for="(event, index) in events" class="d-flex">
+                            <th scope="row" class="col-1">{{ index+1 }}</th>
+                            <td class="text-left col-4">{{ event.outcome_income.name }}</td>
+                            <td class="text-center col-3">{{ event.outcome_income.sum }}</td>
+                            <td class="text-center col-4">{{ convertUTCDateToLocalDate(event.outcome_income.created_at) }}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -48,7 +48,7 @@
         methods: {
             update: function() {
                 axios.get('/event/get').then((e) => {
-                    this.events = e.data;
+                    this.events = e.data.data;
                     //console.log('update history');
                     //console.log(e.data);
                 });

@@ -2099,8 +2099,8 @@ __webpack_require__.r(__webpack_exports__);
         name: "",
         items: [{
           name: "",
-          sum: 0.00,
-          count: 0.00
+          sum: 1.00,
+          count: 1.00
         }]
       }
     };
@@ -2112,8 +2112,8 @@ __webpack_require__.r(__webpack_exports__);
     addOutcomeCard: function addOutcomeCard() {
       this.outcome.items.push({
         name: "",
-        sum: 0.00,
-        count: 0.00
+        sum: 1.00,
+        count: 1.00
       });
     },
     removeOutcomeCard: function removeOutcomeCard(e) {
@@ -2260,7 +2260,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get('/event/get').then(function (e) {
-        _this2.events = e.data; //console.log('update history');
+        _this2.events = e.data.data; //console.log('update history');
         //console.log(e.data);
       });
     },
@@ -72079,7 +72079,7 @@ var render = function() {
                             "form-group d-flex justify-content-md-start flex-wrap"
                         },
                         _vm._l(_vm.outcome.items, function(item, index) {
-                          return _c("div", { staticClass: "card m-3" }, [
+                          return _c("div", { staticClass: "card m-2" }, [
                             _c(
                               "div",
                               {
@@ -72359,23 +72359,29 @@ var render = function() {
             _vm._v("История")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "card-body p-0" }, [
             _c("table", { staticClass: "table table-sm table-hover" }, [
               _vm._m(0),
               _vm._v(" "),
               _c(
                 "tbody",
                 _vm._l(_vm.events, function(event, index) {
-                  return _c("tr", [
-                    _c("th", { attrs: { scope: "row" } }, [
-                      _vm._v(_vm._s(index + 1))
+                  return _c("tr", { staticClass: "d-flex" }, [
+                    _c(
+                      "th",
+                      { staticClass: "col-1", attrs: { scope: "row" } },
+                      [_vm._v(_vm._s(index + 1))]
+                    ),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "text-left col-4" }, [
+                      _vm._v(_vm._s(event.outcome_income.name))
                     ]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(event.outcome_income.name))]),
+                    _c("td", { staticClass: "text-center col-3" }, [
+                      _vm._v(_vm._s(event.outcome_income.sum))
+                    ]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(event.outcome_income.sum))]),
-                    _vm._v(" "),
-                    _c("td", [
+                    _c("td", { staticClass: "text-center col-4" }, [
                       _vm._v(
                         _vm._s(
                           _vm.convertUTCDateToLocalDate(
@@ -72400,16 +72406,28 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-dark" }, [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Название события")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [
-          _vm._v("Итоговая сумма события")
+      _c("tr", { staticClass: "d-flex" }, [
+        _c("th", { staticClass: "col-1", attrs: { scope: "col" } }, [
+          _vm._v("#")
         ]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Дата добовления")])
+        _c(
+          "th",
+          { staticClass: "text-center col-4", attrs: { scope: "col" } },
+          [_vm._v("Название"), _c("br"), _vm._v("события")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "text-center col-3", attrs: { scope: "col" } },
+          [_vm._v("Итоговая"), _c("br"), _vm._v("сумма")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "text-center col-4", attrs: { scope: "col" } },
+          [_vm._v("Дата"), _c("br"), _vm._v("добавления")]
+        )
       ])
     ])
   }

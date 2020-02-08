@@ -20,7 +20,7 @@
         <div class="col-md-6">
             <line-chart-view></line-chart-view>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" style="font-size: 1rem">
             <history-view></history-view>
         </div>
     </div>
