@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class EventController extends Controller
 {
     public function get() {
-        $events = Auth::user()->events()->paginate(7);
+        $events = Auth::user()->events()->orderBy('id', 'DESC')->paginate(7);
         foreach ($events as $event) {
             $event = $event->outcome_income;
             if($event instanceof Outcome) {

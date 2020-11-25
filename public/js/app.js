@@ -2350,7 +2350,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/outcome/get').then(function (e) {
         _this3.profile.outcome = e.data;
-        if (isNaN(_this3.profile.outcome.sum)) _this3.profile.outcome.sum = 0.00; //console.log(e.data);
+        if (isNaN(_this3.profile.outcome.sum)) _this3.profile.outcome.sum = 0.00;else _this3.profile.outcome.sum = _this3.profile.outcome.sum.toFixed(2); //console.log(e.data);
       });
     },
     getIncome: function getIncome() {
@@ -2358,7 +2358,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/income/get').then(function (e) {
         _this4.profile.income = e.data;
-        if (isNaN(_this4.profile.income.sum)) _this4.profile.income.sum = 0.00; //console.log(e.data);
+        if (isNaN(_this4.profile.income.sum)) _this4.profile.income.sum = 0.00;else _this4.profile.income.sum = _this4.profile.income.sum.toFixed(2); //console.log(e.data);
       });
     },
     calcBalance: function calcBalance() {
@@ -84670,7 +84670,16 @@ var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["mixins"].reactivePr
 /* harmony default export */ __webpack_exports__["default"] = ({
   "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["Line"],
   mixins: [reactiveProp],
-  props: ['options'],
+  props: {
+    chartdata: {
+      type: Object,
+      "default": null
+    },
+    options: {
+      type: Object,
+      "default": null
+    }
+  },
   mounted: function mounted() {
     // this.chartData создаётся внутри миксина.
     // Если вы хотите передать опции, создайте локальный объект options
