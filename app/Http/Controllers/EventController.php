@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class EventController extends Controller
 {
     public function get() {
-        $events = Auth::user()->events;
+        $events = Auth::user()->events()->orderBy('id', 'DESC')->paginate(7);
         foreach ($events as $event) {
             $event = $event->outcome_income;
             if($event instanceof Outcome) {
@@ -39,5 +39,14 @@ class EventController extends Controller
     }
     public function destroy() {
 
+    }
+    public function test() {
+        return [
+            'labels' => ['1', '2', '3'],
+            'datasets' => [
+                'label' => 'test',
+                'data' => [10, 20, 30],
+            ]
+        ];
     }
 }

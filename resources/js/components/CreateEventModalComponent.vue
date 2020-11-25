@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="form-group d-flex justify-content-md-start flex-wrap">
-                                <div class="card m-3" v-for="(item, index) in outcome.items">
+                                <div class="card m-2" v-for="(item, index) in outcome.items">
                                     <div class="card-header d-flex justify-content-between bg-dark text-light">
                                         <h5>Услуга/Товар: {{ index+1 }}</h5>
                                         <button type="button" class="btn btn-danger" v-on:click="removeOutcomeCard(index)">Удалить</button>
@@ -104,7 +104,7 @@
                 },
                 outcome: {
                     name: "",
-                    items: [{name: "", sum: 0.00, count: 0.00}]
+                    items: [{name: "", sum: 1.00, count: 1.00}]
                 }
             }
         },
@@ -113,7 +113,7 @@
         },
         methods: {
             addOutcomeCard: function() {
-                this.outcome.items.push({name: "", sum: 0.00, count: 0.00});
+                this.outcome.items.push({name: "", sum: 1.00, count: 1.00});
             },
             removeOutcomeCard: function(e) {
                 if (this.outcome.items.length == 1)

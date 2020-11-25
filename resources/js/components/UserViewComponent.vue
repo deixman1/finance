@@ -50,6 +50,8 @@
                     this.profile.outcome = e.data;
                     if (isNaN(this.profile.outcome.sum))
                         this.profile.outcome.sum = 0.00;
+                    else
+                        this.profile.outcome.sum = this.profile.outcome.sum.toFixed(2);
                     //console.log(e.data);
                 });
             },
@@ -58,6 +60,8 @@
                     this.profile.income = e.data;
                     if (isNaN(this.profile.income.sum))
                         this.profile.income.sum = 0.00;
+                    else
+                        this.profile.income.sum = this.profile.income.sum.toFixed(2);
                     //console.log(e.data);
                 });
             },

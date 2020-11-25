@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Auth::routes();
@@ -26,3 +26,4 @@ Route::post('/income/store', 'IncomeController@store');
 Route::get('/outcome/get', 'OutcomeController@get');
 Route::post('/outcome/store', 'OutcomeController@store');
 Route::post('/item/store', 'ItemController@store');
+Route::get('/test', 'EventController@test');
